@@ -3,19 +3,19 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-  brand: {
-    type: String,
+  BRAND: {
+    type: String
   },
-  brandModel: {
-    type: String,
+  MODEL: {
+    type: String
   },
-  dealer: { type: String },
-  min_mileage: {
-    type: Number,
+  DEALER: { type: String },
+  MIN_MILEAGE: {
+    type: Number
   },
-  max_mileage: {
-    type: Number,
-  },
+  MAX_MILEAGE: {
+    type: Number
+  }
 });
 
 module.exports = mongoose.model("Car", schema);

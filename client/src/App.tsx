@@ -6,7 +6,7 @@ import { getCarsList } from "./services/cars";
 
 function App() {
   useEffect(() => {
-    const data = getCarsList.then((data) => console.log(data.data));
+    getCarsList.then((data) => console.log(data.data));
   });
   return <div className="App"></div>;
 }
