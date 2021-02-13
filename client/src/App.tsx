@@ -1,5 +1,6 @@
-import { link } from "fs";
 import React, { useEffect, useState } from "react";
+
+import Card from "./components/Card";
 
 import "./App.css";
 
@@ -24,11 +25,18 @@ const App: React.FC = () => {
   });
   return (
     <div className="App">
-      <ul>
-        {carsList?.map((item: carItem) => (
-          <li>{item.BRAND}</li>
-        ))}
-      </ul>
+      {carsList?.map((item: carItem) => {
+        const { BRAND, DEALER, MODEL, MAX_MILEAGE, MIN_MILEAGE } = item;
+        return (
+          <Card
+            brand={BRAND}
+            dealer={DEALER}
+            model={MODEL}
+            maxMileage={MAX_MILEAGE}
+            minMileage={MIN_MILEAGE}
+          />
+        );
+      })}
     </div>
   );
 };
