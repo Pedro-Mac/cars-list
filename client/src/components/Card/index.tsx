@@ -1,5 +1,8 @@
 import React from "react";
 
+import "./CardHeader";
+import CardHeader from "./CardHeader";
+
 import "./style.css";
 
 interface cardProps {
@@ -19,10 +22,7 @@ const Card: React.FC<cardProps> = ({
 }) => {
   return (
     <div className="card--container">
-      <div className="card--header-container">
-        <h3 className="card--header-title">{brand}</h3>
-        <p className="card--header-subtitle">{model}</p>
-      </div>
+      <CardHeader brand={brand} model={model} />
       <p className="card--dealer">{dealer}</p>
       <div className="card--mileage-container">
         <p>Mileage</p>
