@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import CarsList from "./containers/CarsList";
+import Sorter from "./components/Sorter";
 
 import { getCarsList } from "./services/cars";
 
@@ -17,16 +18,20 @@ interface carItem {
 
 const App: React.FC = () => {
   const [carsList, setCarsList] = useState<carItem[]>([]);
+  const [sortingDirection, setSortingDirection] = useState("ascending");
+  const [filters, setFilters] = useState<string[]>([]);
 
   useEffect(() => {
-    getCarsList.then(response => {
+    const body = { sorting: sortingDirection, filters };
+    getCarsList(body).then(response => {
       const { orderedList } = response.data;
       setCarsList(orderedList);
     });
-  });
+  }, [sortingDirection, filters]);
 
   return (
     <div className="App">
+      <Sorter handleSorting={setSortingDirection} />
       <CarsList carsList={carsList} />
     </div>
   );

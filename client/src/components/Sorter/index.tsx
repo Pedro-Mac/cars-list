@@ -1,10 +1,14 @@
 import React from "react";
 
-const Sorter = () => {
+interface sorterProps {
+  handleSorting: (direction: string) => void;
+}
+
+const Sorter: React.FC<sorterProps> = ({ handleSorting }) => {
   return (
     <div>
-      <p>A - Z</p>
-      <p>Z - A</p>
+      <p onClick={() => handleSorting("ascending")}>A - Z</p>
+      <p onClick={() => handleSorting("descending")}>Z - A</p>
     </div>
   );
 };
