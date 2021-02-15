@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 
 import CarsList from "./containers/CarsList";
 import Sorter from "./components/Sorter";
@@ -16,22 +16,35 @@ interface carItem {
   MAX_MILEAGE: number;
 }
 
+interface filterItem {
+  filter: string;
+  isActive: boolean;
+}
+
 const App: React.FC = () => {
   const [carsList, setCarsList] = useState<carItem[]>([]);
   const [sortingDirection, setSortingDirection] = useState("ascending");
-  const [filters, setFilters] = useState<string[]>([]);
+  const [filters, setFilters] = useState<filterItem[]>([]);
 
   useEffect(() => {
     const body = { sorting: sortingDirection, filters };
     getCarsList(body).then(response => {
-      const { orderedList } = response.data;
+      const { orderedList, filters } = response.data;
+
       setCarsList(orderedList);
+      setFilters(filters);
     });
-  }, [sortingDirection, filters]);
+  }, [sortingDirection]);
 
   return (
     <div className="App">
-      <Sorter handleSorting={setSortingDirection} />
+      <form>
+        <input type="checkbox" />
+      </form>
+      {filters.map(item => (
+        <p>{item.filter}</p>
+      ))}
+      {carsList.length ? <Sorter handleSorting={setSortingDirection} /> : ""}
       <CarsList carsList={carsList} />
     </div>
   );

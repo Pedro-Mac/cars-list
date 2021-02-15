@@ -1,0 +1,21 @@
+.sorter--container {
+  display: flex;
+  justify-content: space-between;
+  width: 7rem;
+  margin: 1rem auto 0 auto;
+}
+
+.sorter--handler-container {
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(253, 248, 239);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.sorter--handler-container:hover {
+  background-color: rgb(255, 245, 217);
+}

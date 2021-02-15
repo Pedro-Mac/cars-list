@@ -6,18 +6,23 @@ const {
   compareAscending,
   compareDescending
 } = require("./helpers/compareStrings");
+const createFilters = require("./helpers/createFilters");
 
 router.get("/cars", async (req, res, next) => {
   const { direction } = req.query;
   try {
     const carList = await Car.find();
-
     const orderedList =
       direction === "ascending"
         ? carList.sort(compareAscending)
         : carList.sort(compareDescending);
 
-    res.json({ type: "success", orderedList });
+    const filters = createFilters(orderedList).map(item => ({
+      filter: item,
+      isActive: false
+    }));
+
+    res.json({ type: "success", orderedList, filters });
   } catch (error) {
     next(error);
   }
