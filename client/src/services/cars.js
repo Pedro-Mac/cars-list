@@ -2,9 +2,9 @@ import axios from "axios";
 
 export const getCarsList = body => {
   let filtersString = "";
-  const activeFilters = body.filters.filter(item => item.isActive);
-  for (const el of activeFilters) {
-    filtersString += `&filter=${el.filter}`;
+
+  for (const el of body.filters) {
+    filtersString += `&filter=${el}`;
   }
   return axios
     .get(

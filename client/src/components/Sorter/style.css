@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   width: 7rem;
-  margin: 1rem auto 0 auto;
 }
 
 .sorter--handler-container {

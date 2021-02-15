@@ -2,3 +2,15 @@
   max-width: 60rem;
   margin: 0 auto;
 }
+
+.header {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.form--container {
+  display: flex;
+  margin-right: 4rem;
+  align-items: center;
+}

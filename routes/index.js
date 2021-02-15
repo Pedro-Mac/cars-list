@@ -9,18 +9,26 @@ const {
 const createFilters = require("./helpers/createFilters");
 
 router.get("/cars", async (req, res, next) => {
-  const { direction } = req.query;
+  const { direction, filter } = req.query;
+
   try {
+    //this works but it will not show the other brands as filters on the client side
+    //const carList = await Car.find({ BRAND: { $in: filter } });
     const carList = await Car.find();
+    const filteredList = () => {
+      if (filter) {
+        return carList.filter(item => filter.includes(item.BRAND));
+      } else {
+        return carList;
+      }
+    };
+
     const orderedList =
       direction === "ascending"
-        ? carList.sort(compareAscending)
-        : carList.sort(compareDescending);
+        ? filteredList().sort(compareAscending)
+        : filteredList().sort(compareDescending);
 
-    const filters = createFilters(orderedList).map(item => ({
-      filter: item,
-      isActive: false
-    }));
+    const filters = createFilters(carList);
 
     res.json({ type: "success", orderedList, filters });
   } catch (error) {
