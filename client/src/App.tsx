@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import CarsList from "./containers/CarsList";
 import Sorter from "./components/Sorter";
 import FilterInput from "./components/FilterInput";
-import Button from "./components/Button";
 
 import { getCarsList } from "./services/cars";
 
@@ -32,7 +31,7 @@ const App: React.FC = () => {
       setCarsList(orderedList);
       setFilters(filters);
     });
-  }, [sortingDirection]);
+  }, [sortingDirection, activeFilters]);
 
   const handleActiveFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
@@ -44,33 +43,29 @@ const App: React.FC = () => {
     }
   };
 
-  const handleFormSubmission = (event: React.FormEvent) => {
-    event.preventDefault();
-    const body = { sorting: sortingDirection, filters: activeFilters };
-    getCarsList(body).then(response => {
-      const { orderedList, filters } = response.data;
-      console.log(response.data);
-      setCarsList(orderedList);
-      setFilters(filters);
-    });
-  };
-
   return (
     <div className="App">
-      <div className="header">
-        <form onSubmit={handleFormSubmission} className="form--container">
-          {filters.map(item => (
-            <FilterInput
-              filter={item}
-              handleChange={handleActiveFilters}
-              key={item}
-            />
-          ))}
-          <Button text="Search" />
-        </form>
+      {carsList.length ? (
+        <div className="header">
+          <form className="form--container">
+            {filters.map(item => (
+              <FilterInput
+                filter={item}
+                handleChange={handleActiveFilters}
+                activeFilters={activeFilters}
+                key={item}
+              />
+            ))}
+          </form>
 
-        {carsList.length ? <Sorter handleSorting={setSortingDirection} /> : ""}
-      </div>
+          <Sorter
+            handleSorting={setSortingDirection}
+            direction={sortingDirection}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <CarsList carsList={carsList} />
     </div>
   );

@@ -21,3 +21,8 @@ label:hover {
   color: rgba(78, 168, 247, 0.7);
   border-color: rgba(78, 168, 247, 0.7);
 }
+
+.is-active {
+  color: rgba(78, 168, 247, 0.7);
+  border-color: rgba(78, 168, 247, 0.7);
+}
