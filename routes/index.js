@@ -12,7 +12,7 @@ router.get("/cars", async (req, res, next) => {
   const { direction, filter } = req.query;
 
   try {
-    //this works but it will not show the other brands as filters on the client side
+    //this queries properly, but it will limit the filters on the client side
     //const carList = await Car.find({ BRAND: { $in: filter } });
     const carList = await Car.find();
     const filteredList = () => {

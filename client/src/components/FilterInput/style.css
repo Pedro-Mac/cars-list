@@ -3,11 +3,11 @@
   align-items: center;
 }
 
-input {
+.filter--input {
   display: none;
 }
 
-label {
+.filter--label {
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -20,7 +20,7 @@ label {
   height: 3rem;
 }
 
-label:hover {
+.filter--label:hover {
   color: rgba(78, 168, 247, 0.7);
   border-color: rgba(78, 168, 247, 0.7);
 }

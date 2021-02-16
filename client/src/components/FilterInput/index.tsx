@@ -14,7 +14,10 @@ const FilterInput: React.FC<filterInputProps> = ({
   const isActive = activeFilters.includes(filter);
   return (
     <div className="filter--item-container">
-      <label className={isActive ? "is-active" : ""} htmlFor={filter}>
+      <label
+        className={`filter--label ${isActive && "is-active"}`}
+        htmlFor={filter}
+      >
         {filter}
       </label>
       <input
@@ -23,6 +26,7 @@ const FilterInput: React.FC<filterInputProps> = ({
         name={filter}
         value={filter}
         onChange={handleChange}
+        className="filter--input"
       />
     </div>
   );
