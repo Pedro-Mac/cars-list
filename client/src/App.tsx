@@ -6,16 +6,11 @@ import FilterInput from "./components/FilterInput";
 
 import { getCarsList } from "./services/cars";
 
-import "./App.css";
+import { updateFilters } from "./helpers/updateFilters";
 
-interface carItem {
-  _id: string;
-  BRAND: string;
-  MODEL: string;
-  DEALER: string;
-  MIN_MILEAGE: number;
-  MAX_MILEAGE: number;
-}
+import { carItem } from "./types";
+
+import "./App.css";
 
 const App: React.FC = () => {
   const [carsList, setCarsList] = useState<carItem[]>([]);
@@ -35,17 +30,13 @@ const App: React.FC = () => {
 
   const handleActiveFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
-    if (!activeFilters.includes(name)) {
-      setActiveFilters([...activeFilters, name]);
-    } else {
-      const updatedFilteres = activeFilters.filter(item => item !== name);
-      setActiveFilters(updatedFilteres);
-    }
+
+    updateFilters(name, setActiveFilters, activeFilters);
   };
 
   return (
     <div className="App">
-      {carsList.length ? (
+      {carsList.length > 0 && (
         <div className="header">
           <form className="form--container">
             {filters.map(item => (
@@ -63,8 +54,6 @@ const App: React.FC = () => {
             direction={sortingDirection}
           />
         </div>
-      ) : (
-        ""
       )}
       <CarsList carsList={carsList} />
     </div>

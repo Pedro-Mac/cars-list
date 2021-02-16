@@ -1,0 +1,17 @@
+.card--mileage-container {
+  margin-top: 0.5rem;
+}
+
+.card--milage-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.25rem;
+}
+
+.card--milage-element {
+  font-size: 0.85rem;
+}
+
+span {
+  font-weight: 500;
+}
