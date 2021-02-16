@@ -63,7 +63,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
+    <div className="App" data-testid="main-app">
       {carsList.length > 0 && (
         <div className="header">
           <form className="form--container" onSubmit={handleFormSubmission}>
