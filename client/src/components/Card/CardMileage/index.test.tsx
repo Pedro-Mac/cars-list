@@ -7,6 +7,6 @@ interface cardMileageProps {
   maxMileage: number;
 }
 
-test("renders learn react link", () => {
+test("renders card mileage", () => {
   render(<CardMileage minMileage={5} maxMileage={9} />);
 });
