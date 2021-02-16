@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
+import React, { useEffect, useState, useCallback } from "react";
 
 import CarsList from "./containers/CarsList";
 import Sorter from "./components/Sorter";
 import FilterInput from "./components/FilterInput";
 import Button from "./components/Button";
+import Pagination from "./components/Pagination";
 
 import { updateFilters } from "./helpers/updateFilters";
 import { handleHttpRequest } from "./helpers/handleHttpRequest";
@@ -22,7 +22,7 @@ const App: React.FC = () => {
   const [itemsPerPage] = useState<number>(12);
   const [pageCount, setpageCount] = useState<number>(0);
 
-  useEffect(() => {
+  const getList = useCallback(() => {
     handleHttpRequest(
       sortingDirection,
       activeFilters,
@@ -32,6 +32,18 @@ const App: React.FC = () => {
       offset,
       itemsPerPage
     );
+  }, [
+    sortingDirection,
+    activeFilters,
+    setCarsList,
+    setFilters,
+    setpageCount,
+    offset,
+    itemsPerPage
+  ]);
+
+  useEffect(() => {
+    getList();
   }, [sortingDirection, offset]);
 
   const handleActiveFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,15 +53,7 @@ const App: React.FC = () => {
 
   const handleFormSubmission = (event: React.FormEvent) => {
     event.preventDefault();
-    handleHttpRequest(
-      sortingDirection,
-      activeFilters,
-      setCarsList,
-      setFilters,
-      setpageCount,
-      offset,
-      itemsPerPage
-    );
+    getList();
     setOffset(0);
   };
 
@@ -81,12 +85,8 @@ const App: React.FC = () => {
         </div>
       )}
       <CarsList carsList={carsList} />
-      <ReactPaginate
-        pageCount={pageCount}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={1}
-        onPageChange={handleNewPage}
-      />
+
+      <Pagination pageCount={pageCount} handlePageClick={handleNewPage} />
     </div>
   );
 };
