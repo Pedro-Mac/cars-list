@@ -3,4 +3,7 @@
 ## Install dependencies
 
 - Run `npm i` in order to install dependencies
+
+## Run server
+
 - Run `npm run dev` to initialize development server
