@@ -9,8 +9,8 @@ import { carItem, carsListProps } from "./types";
 const CarsList: React.FC<carsListProps> = ({ carsList }) => {
   return (
     <article>
-      {carsList?.map((item: carItem) => {
-        const { BRAND, DEALER, MODEL, MAX_MILEAGE, MIN_MILEAGE, _id } = item;
+      {carsList.map((item: carItem, index) => {
+        const { BRAND, DEALER, MODEL, MAX_MILEAGE, MIN_MILEAGE } = item;
         return (
           <Card
             brand={BRAND}
@@ -18,7 +18,7 @@ const CarsList: React.FC<carsListProps> = ({ carsList }) => {
             model={MODEL}
             maxMileage={MAX_MILEAGE}
             minMileage={MIN_MILEAGE}
-            key={_id}
+            key={index}
           />
         );
       })}

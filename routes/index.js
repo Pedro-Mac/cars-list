@@ -4,7 +4,7 @@ const csv = require("csv-parser");
 const fs = require("fs");
 
 const router = new Router();
-const Car = require("../models/car");
+
 const {
   compareAscending,
   compareDescending

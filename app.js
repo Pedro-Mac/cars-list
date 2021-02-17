@@ -3,15 +3,23 @@
 const { join } = require("path");
 const express = require("express");
 const createError = require("http-errors");
-const logger = require("morgan");
 const serveFavicon = require("serve-favicon");
 const indexRouter = require("./routes/index");
 
 const app = express();
 
 app.use(serveFavicon(join(__dirname, "public/images", "favicon.ico")));
-app.use(logger("dev"));
+
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.use("/", indexRouter);
 
