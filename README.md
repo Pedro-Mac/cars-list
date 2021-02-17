@@ -1,12 +1,19 @@
 # Getting Stared
 
-## Install dependencies
+## Server
+
+### Install dependencies
 
 - Run `npm i` in order to install dependencies
 
-## Run server
+### Run server
 
 - Run `npm run dev` to initialize development server
+
+## Client
+
+- `cd client`
+- Follow instructions there
 
 ## Observations
 
